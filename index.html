@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investcred – Crédito que Funciona de Verdade</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #00e676;
+    --verde-escuro: #00b050;
+    --preto: #0a0a0a;
+    --cinza: #1a1a1a;
+    --cinza-claro: #2a2a2a;
+    --branco: #f5f5f5;
+    --amarelo: #FFD600;
+    --vermelho: #FF3B3B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--preto);
+    color: var(--branco);
+    font-family: 'Barlow', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── REVEAL SECTION ── */
+  #reveal {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: var(--preto);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #reveal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, #003320 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .emoji-big {
+    font-size: clamp(60px, 15vw, 120px);
+    animation: bounce 1.2s ease infinite alternate;
+    margin-bottom: 16px;
+  }
+
+  @keyframes bounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-16px); }
+  }
+
+  .reveal-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(11px, 3vw, 14px);
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--verde);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.3s forwards;
+  }
+
+  .reveal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 12vw, 110px);
+    line-height: 0.95;
+    text-align: center;
+    color: var(--branco);
+    opacity: 0;
+    animation: fadeUp 0.7s 0.5s forwards;
+    margin-bottom: 24px;
+  }
+
+  .reveal-title span {
+    color: var(--verde);
+    display: block;
+  }
+
+  .reveal-body {
+    font-size: clamp(16px, 4vw, 22px);
+    font-weight: 600;
+    text-align: center;
+    color: #ccc;
+    max-width: 620px;
+    line-height: 1.5;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.8s forwards;
+    margin-bottom: 12px;
+  }
+
+  .reveal-body strong {
+    color: var(--branco);
+  }
+
+  .reveal-note {
+    font-size: 14px;
+    color: #777;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.6s 1.1s forwards;
+    margin-bottom: 40px;
+  }
+
+  .scroll-cta {
+    opacity: 0;
+    animation: fadeUp 0.6s 1.3s forwards;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .scroll-cta span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--verde);
+  }
+
+  .arrow-down {
+    width: 28px;
+    height: 28px;
+    border-right: 3px solid var(--verde);
+    border-bottom: 3px solid var(--verde);
+    transform: rotate(45deg);
+    animation: arrowPulse 1s ease infinite alternate;
+  }
+
+  @keyframes arrowPulse {
+    from { opacity: 0.4; transform: rotate(45deg) translateY(0); }
+    to   { opacity: 1;   transform: rotate(45deg) translateY(6px); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--verde), transparent);
+  }
+
+  /* ── HEADLINE SECTION ── */
+  #pitch {
+    background: var(--cinza);
+    padding: 80px 20px 60px;
+    text-align: center;
+  }
+
+  .pitch-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--verde);
+    margin-bottom: 16px;
+  }
+
+  .pitch-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 9vw, 80px);
+    line-height: 1;
+    color: var(--branco);
+    margin-bottom: 20px;
+  }
+
+  .pitch-title em {
+    color: var(--verde);
+    font-style: normal;
+  }
+
+  .pitch-sub {
+    font-size: clamp(15px, 3.5vw, 19px);
+    color: #aaa;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── CARDS ── */
+  #servicos {
+    padding: 60px 20px 80px;
+    background: var(--preto);
+  }
+
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--verde);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 8vw, 64px);
+    text-align: center;
+    color: var(--branco);
+    margin-bottom: 48px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: var(--cinza);
+    border: 1px solid #2e2e2e;
+    border-top: 4px solid var(--verde);
+    border-radius: 4px;
+    padding: 32px 28px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-top-color: var(--verde);
+    border-color: var(--verde);
+  }
+
+  .card-icon {
+    font-size: 36px;
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: var(--branco);
+    line-height: 1;
+  }
+
+  .card-desc {
+    font-size: 15px;
+    color: #aaa;
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-desc strong {
+    color: var(--verde);
+  }
+
+  .card-badge {
+    display: inline-block;
+    background: rgba(0, 230, 118, 0.12);
+    border: 1px solid var(--verde);
+    color: var(--verde);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 2px;
+    width: fit-content;
+  }
+
+  .btn-whats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--verde);
+    color: #000;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 20px;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-whats:hover {
+    background: var(--verde-escuro);
+    transform: scale(1.03);
+  }
+
+  .btn-whats svg {
+    width: 22px;
+    height: 22px;
+    fill: #000;
+    flex-shrink: 0;
+  }
+
+  /* ── URGENCY BANNER ── */
+  #urgencia {
+    background: var(--verde);
+    padding: 20px;
+    text-align: center;
+  }
+
+  #urgencia p {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(16px, 4vw, 22px);
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #000;
+  }
+
+  /* ── SOCIAL PROOF ── */
+  #prova {
+    background: var(--cinza);
+    padding: 70px 20px;
+    text-align: center;
+  }
+
+  .prova-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 7vw, 58px);
+    color: var(--branco);
+    margin-bottom: 40px;
+  }
+
+  .depoimentos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto 48px;
+  }
+
+  .dep {
+    background: var(--cinza-claro);
+    border-left: 4px solid var(--verde);
+    padding: 24px 20px;
+    border-radius: 2px;
+    text-align: left;
+  }
+
+  .dep-text {
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .dep-autor {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--verde);
+  }
+
+  /* ── FINAL CTA ── */
+  #final-cta {
+    background: var(--preto);
+    padding: 80px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #final-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center bottom, #002a14 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .final-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 10vw, 90px);
+    line-height: 1;
+    color: var(--branco);
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .final-title span { color: var(--verde); }
+
+  .final-sub {
+    font-size: clamp(15px, 3.5vw, 19px);
+    color: #999;
+    max-width: 500px;
+    margin: 0 auto 36px;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .btn-final {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--verde);
+    color: #000;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(18px, 4vw, 24px);
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 18px 36px;
+    border-radius: 3px;
+    transition: background 0.2s, transform 0.15s;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0,230,118,0.3);
+  }
+
+  .btn-final:hover {
+    background: var(--verde-escuro);
+    transform: scale(1.04);
+    box-shadow: 0 0 60px rgba(0,230,118,0.5);
+  }
+
+  .btn-final svg {
+    width: 26px;
+    height: 26px;
+    fill: #000;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #070707;
+    padding: 24px 20px;
+    text-align: center;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: #555;
+  }
+
+  footer a { color: #777; text-decoration: none; }
+
+  /* ── WHATSAPP FLOAT ── */
+  .whats-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+    z-index: 999;
+    transition: transform 0.2s;
+    text-decoration: none;
+  }
+
+  .whats-float:hover { transform: scale(1.1); }
+
+  .whats-float svg { width: 32px; height: 32px; fill: #fff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .cards { grid-template-columns: 1fr; }
+    .depoimentos { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ FLOATING WHATSAPP ══ -->
+<a class="whats-float" href="https://wa.me/5535988091491" target="_blank" title="Falar no WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ══ 1. REVEAL ══ -->
+<section id="reveal">
+  <div class="emoji-big">😂</div>
+  <p class="reveal-tag">Psiu — você foi fisgado</p>
+  <h1 class="reveal-title">
+    Não existe<br>
+    <span>Pedro Silva.</span>
+  </h1>
+  <p class="reveal-body">
+    Esse cartaz foi feito pra você parar, rir… e <strong>descobrir algo que pode mudar sua vida financeira hoje.</strong>
+  </p>
+  <p class="reveal-note">Mas agora que você está aqui, aproveita — porque o que vem a seguir é sério.</p>
+  <a class="scroll-cta" href="#pitch">
+    <span>Ver o que é isso</span>
+    <div class="arrow-down"></div>
+  </a>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ 2. PITCH ══ -->
+<section id="pitch">
+  <p class="pitch-eyebrow">Investcred — Crédito de verdade</p>
+  <h2 class="pitch-title">Seu dinheiro<br><em>parado</em> te custa caro.</h2>
+  <p class="pitch-sub">Enquanto você espera, os juros crescem. Nós desbloqueamos crédito rápido, sem enrolação, direto no seu bolso.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ 3. SERVIÇOS ══ -->
+<section id="servicos">
+  <p class="section-label">O que fazemos</p>
+  <h2 class="section-title">Escolha o seu</h2>
+
+  <div class="cards">
+
+    <!-- FGTS -->
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <div class="card-title">Antecipação de FGTS</div>
+      <span class="card-badge">Dinheiro hoje</span>
+      <p class="card-desc">
+        Seu FGTS está parado lá rendendo <strong>nada pra você</strong>. A gente antecipa em até <strong>10 minutos</strong>, sem consulta ao SPC/Serasa, sem burocracia.
+      </p>
+      <a class="btn-whats" href="https://wa.me/5535988091491?text=Quero+antecipar+meu+FGTS" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quero meu FGTS agora
+      </a>
+    </div>
+
+    <!-- CARTÃO CLT -->
+    <div class="card">
+      <div class="card-icon">💳</div>
+      <div class="card-title">Consignado CLT</div>
+      <span class="card-badge">Aprovação rápida</span>
+      <p class="card-desc">
+        Crédito consignado para quem tem carteira assinada. Desconto direto em folha, <strong>aprovação rápida</strong> e sem burocracia. Para quem trabalha de CLT e merece crédito de verdade.
+      </p>
+      <a class="btn-whats" href="https://wa.me/5535988091491?text=Quero+o+Consignado+CLT" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quero meu consignado CLT
+      </a>
+    </div>
+
+    <!-- CONSÓRCIO -->
+    <div class="card">
+      <div class="card-icon">🏠</div>
+      <div class="card-title">Consórcio</div>
+      <span class="card-badge">Sem juros</span>
+      <p class="card-desc">
+        Imóvel, carro ou moto <strong>sem pagar juros absurdos</strong> de financiamento. Parcelas que cabem no bolso, contemplação garantida.
+      </p>
+      <a class="btn-whats" href="https://wa.me/5535988091491?text=Quero+saber+sobre+Cons%C3%B3rcio" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quero meu consórcio
+      </a>
+    </div>
+
+    <!-- CONSIGNADO -->
+    <div class="card">
+      <div class="card-icon">🏛️</div>
+      <div class="card-title">Crédito Consignado</div>
+      <span class="card-badge">Menor juros do mercado</span>
+      <p class="card-desc">
+        Para <strong>servidores públicos, aposentados e pensionistas</strong>. Desconto direto no benefício, aprovação rápida e as menores taxas disponíveis.
+      </p>
+      <a class="btn-whats" href="https://wa.me/5535988091491?text=Quero+saber+sobre+Cr%C3%A9dito+Consignado" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quero meu consignado
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ 4. URGÊNCIA ══ -->
+<div id="urgencia">
+  <p>⚡ Não deixa pra amanhã o dinheiro que você pode ter hoje</p>
+</div>
+
+<!-- ══ 5. PROVA SOCIAL ══ -->
+<section id="prova">
+  <h2 class="prova-title">Quem já aproveitou sabe</h2>
+  <div class="depoimentos">
+    <div class="dep">
+      <p class="dep-text">"Antecipei meu FGTS e o dinheiro caiu na minha conta em menos de 10 minutos. Não acreditei quando vi!"</p>
+      <p class="dep-autor">— Marcos R., Alfenas-MG</p>
+    </div>
+    <div class="dep">
+      <p class="dep-text">"Fiz o consignado CLT e foi o crédito mais fácil que já peguei. Desconta direto no salário, sem dor de cabeça."</p>
+      <p class="dep-autor">— Fernanda T., Três Corações-MG</p>
+    </div>
+    <div class="dep">
+      <p class="dep-text">"Aposentado e nunca consegui crédito fácil. Pelo consignado foi aprovado na hora, com parcela que cabe no bolso."</p>
+      <p class="dep-autor">— Ricardo M., Varginha-MG</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 6. FINAL CTA ══ -->
+<section id="final-cta">
+  <h2 class="final-title">Não perca mais<br><span>tempo.</span></h2>
+  <p class="final-sub">Um clique. Uma conversa. Seu crédito resolvido hoje.</p>
+  <a class="btn-final" href="https://wa.me/5535988091491?text=Ol%C3%A1%2C+vim+pelo+cart%C3%A3o+e+quero+saber+mais" target="_blank">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Falar agora no WhatsApp
+  </a>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <p>© 2026 Investcred — Todos os direitos reservados &nbsp;|&nbsp; <a href="#">Política de Privacidade</a></p>
+</footer>
+
+</body>
+</html>
